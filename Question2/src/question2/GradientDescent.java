@@ -23,8 +23,8 @@ public class GradientDescent
   public GradientDescent()
   {
     stepSize = 0.0001;
-    minGradientNorm = 1*Math.exp(-6);
-    minDx = 1*Math.exp(-6);
+    minGradientNorm = Math.exp(-6);
+    minDx = Math.exp(-6);
     maxIterations = 10000;
     objectiveFunc = new BlackBoxFunction();
   }
@@ -39,10 +39,11 @@ public class GradientDescent
   public GradientDescent(double stepSizeAlpha, double minimumGradient, 
           double minimumDx, int maximumIterations)
   {
-   stepSize = stepSizeAlpha;
-   minGradientNorm = minimumGradient;
-   minDx = minimumDx;
-   maxIterations = maximumIterations;
+    stepSize = stepSizeAlpha;
+    minGradientNorm = minimumGradient;
+    minDx = minimumDx;
+    maxIterations = maximumIterations;
+    objectiveFunc = new BlackBoxFunction();
   }
   
   /**
@@ -56,10 +57,9 @@ public class GradientDescent
     double gradientNorm = Double.MAX_VALUE;
     double dx = Double.MAX_VALUE;
     
-    // find gradient
     int iteration = 0;
     
-    // gradient descent loop with 3 termination conditions
+    // Gradient descent loop with 3 termination conditions
     while (iteration < maxIterations && 
             gradientNorm >= minGradientNorm &&
             dx >= minDx)

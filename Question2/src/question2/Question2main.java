@@ -8,7 +8,8 @@ public class Question2main
    */
   public static void main(String[] args)
   {
-    GradientDescent gd = new GradientDescent();
-    System.out.println(gd.run(-10.4));
+    GradientDescent gd = new GradientDescent(0.0001,
+            Math.exp(-6), Math.exp(-6), 10000);
+    System.out.println(gd.run(-2.5));
   }
 }

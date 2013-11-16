@@ -17,7 +17,9 @@ public class GradientDescent
   // Step size
   private double stepSize;
   
-  // Default constructor uses default settings
+  /**
+   * Create gradient descent object with default settings.
+   */
   public GradientDescent()
   {
     stepSize = 0.0001;
@@ -26,7 +28,29 @@ public class GradientDescent
     maxIterations = 10000;
     objectiveFunc = new BlackBoxFunction();
   }
+  /**
+   * Create gradient descent object with custom settings.
+   * 
+   * @param stepSizeAlpha Step size alpha coefficient 
+   * @param minimumGradient Minimum gradient norm stop condition
+   * @param minimumDx Minimum change in x stop condition
+   * @param maximumIterations Maximum iterations stop condition
+   */
+  public GradientDescent(double stepSizeAlpha, double minimumGradient, 
+          double minimumDx, int maximumIterations)
+  {
+   stepSize = stepSizeAlpha;
+   minGradientNorm = minimumGradient;
+   minDx = minimumDx;
+   maxIterations = maximumIterations;
+  }
   
+  /**
+   * Run gradient descent with starting value x
+   * 
+   * @param x Starting x value
+   * @return X value of local minimum found with gradient descent
+   */
   public double run(double x)
   {
     double gradientNorm = Double.MAX_VALUE;

@@ -15,28 +15,22 @@ public class GradientDescentWorker implements Runnable {
 	  
 	// Mystery function
 	private Function objectiveFunc;
-	  
+	
 	// Step size
 	private double stepSize;*/
 	private GradientDescent GD;
-	  
+	private Function func;
+	private int numInternalIterations;
+	
+	private double finalValue;
 	//starting point
 
 
-	public GradientDescentWorker(GradientDescent GD)
+	public GradientDescentWorker(GradientDescent GD,Function func, int numInternalIterations)
 	  {
 		this.GD = GD;
-		/*this.GD.setDomainMin(domainMin);
-		this.GD.setDomainMax(domainMax);
-		this.GD.setxStart(xStart);*/
-		
-		
-		
-	   /* stepSize = stepSizeAlpha;
-	    minGradientNorm = minimumGradient;
-	    minDx = minimumDx;
-	    maxIterations = maximumIterations;
-	    objectiveFunc = new BlackBoxFunction();*/
+		this.func = func;
+		this.numInternalIterations = numInternalIterations;
 	    
 	  }	
 	
@@ -47,12 +41,24 @@ public class GradientDescentWorker implements Runnable {
 	   */	
 		public void run() {
 			
-			this.GD.start();
+			for (int i=0; i<this.numInternalIterations; i++){
+				double currentValue;
+				double xStart = (Math.random()-0.50)*40;
+				
+				this.GD.setxStart(xStart);
+				currentValue = this.GD.start();
+				if(i==0 || this.func.evaluate(currentValue) <= this.func.evaluate(this.finalValue )){
+					this.finalValue = currentValue;
+				}
+			}
 		}
+		
+		
+		
 		
 	
 	public double getFinalValue(){
-		return 0.0;
+		return this.finalValue;
 	}
 
 }

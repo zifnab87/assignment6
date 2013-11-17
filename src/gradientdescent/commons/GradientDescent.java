@@ -1,5 +1,6 @@
 package gradientdescent.commons;
 
+
 import gradientdescent.functions.Function;
 
 public class GradientDescent {
@@ -9,11 +10,23 @@ public class GradientDescent {
 	private int numOfIterations; 
 	private double precision;
 	
+	
+	
+	//set later
 	private double domainMin;
 	private double domainMax;
-	
 	private double xStart;
 	
+	//set later if parallel
+	private int numOfWorkers;
+	
+	
+
+
+
+
+
+
 	public GradientDescent(Function function, double stepSize, int numOfIterations, double precision){
 		this.function = function;
 		this.stepSize = stepSize;
@@ -21,36 +34,44 @@ public class GradientDescent {
 		this.precision = precision;
 		
 	}
-
+	
+	
+	
+	
+	
 	
 	public double start(){
 	    double dx = Double.MAX_VALUE;
 	    double x = this.xStart;
 
-	    int iteration = 0;
+	    int stepcount = 0;
 
 	    // Gradient descent loop with 3 termination conditions
-	    while (iteration < numOfIterations && dx >= precision)
+	    while (stepcount < numOfIterations && dx >= precision && isInDomain(x))
 	    {
 	      // Calculate gradient
-	      double gradient = function.firstDerivative(x);
+	      double derivative = function.firstDerivative(x);
 	      
 	      // Take step based on stepsize * gradient
-	      double xNext = x - stepSize * gradient;
+	      double xNext = x - stepSize * derivative;
 	      
 	      // Calculate the difference between steps
 	      dx = Math.abs(xNext-x);
 	      
 	      // Update iteration count
-	      iteration++;
+	      stepcount++;
 	      
 	      // Update x for next iteration
 	      x = xNext;
 	    }
-	    //System.out.println("iterations: " + iteration);
+	    System.out.println("steps: " + stepcount);
 	    return x;
 	}
 	
+	
+	
+	
+		
 	public double getxStart() {
 		return xStart;
 	}
@@ -74,11 +95,15 @@ public class GradientDescent {
 	public void setDomainMax(double domainMax) {
 		this.domainMax = domainMax;
 	}
-
-	public GradientDescent(double domainMin, double domanMax){
-		this.domainMin = domainMin;
-		this.domainMax = domainMax;
+	
+	public int getNumOfWorkers() {
+		return numOfWorkers;
 	}
+
+	public void setNumOfWorkers(int numOfWorkers) {
+		this.numOfWorkers = numOfWorkers;
+	}
+
 	
 	//checks if an x is between domainMin and domainMax
 	public boolean isInDomain(double x){

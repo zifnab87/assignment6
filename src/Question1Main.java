@@ -2,14 +2,11 @@
 
 
 import gradientdescent.commons.GradientDescent;
-import gradientdescent.commons.GradientDescentWorker;
 import gradientdescent.functions.ConvexFunction;
 import gradientdescent.functions.Function;
 
 public class Question1Main {
 	public static class Config {
-		public static final boolean IS_PARALLEL = false;
-		public static final int NUM_WORKERS = 1;
 		public static final Function FUNCTION = new ConvexFunction();
 		public static final double STEP_SIZE = 0.01;
 		public static final double PRECISION = 0.00001;

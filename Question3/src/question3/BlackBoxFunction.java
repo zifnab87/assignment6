@@ -1,5 +1,4 @@
-package question2;
-
+package question3;
 public class BlackBoxFunction
 {
   public BlackBoxFunction()

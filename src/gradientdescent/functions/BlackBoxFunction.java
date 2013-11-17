@@ -1,6 +1,6 @@
 package gradientdescent.functions;
 
-public class BlackBoxFunction
+public class BlackBoxFunction extends Function
 {
   public BlackBoxFunction()
   {
@@ -24,7 +24,7 @@ public class BlackBoxFunction
    * @param x Input value
    * @return 
    */
-  public double grad(double x)
+  public double firstDerivative(double x)
   {
     // d/dx ( (6x)*Math.expsin(sin(3*(cos(3*x))))+x^2 )
     return 2*x-54*x*Math.sin(3*x)*Math.cos(3*Math.cos(3*x))*

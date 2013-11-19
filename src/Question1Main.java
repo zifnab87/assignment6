@@ -1,6 +1,3 @@
-
-
-
 import gradientdescent.commons.GradientDescent;
 import gradientdescent.functions.ConvexFunction;
 import gradientdescent.functions.Function;
@@ -8,8 +5,8 @@ import gradientdescent.functions.Function;
 public class Question1Main {
 	public static class Config {
 		public static final Function FUNCTION = new ConvexFunction();
-		public static final double STEP_SIZE = 0.01;
-		public static final double PRECISION = 0.00001;
+		public static final double STEP_SIZE = 1;
+		public static final double PRECISION = 0.001;
 		public static final int MAX_ITERATIONS = 1000;
 	}
 	
@@ -20,11 +17,9 @@ public class Question1Main {
 									Config.MAX_ITERATIONS,
 									Config.PRECISION
 							);
-		double domainMin = Double.MIN_VALUE;
+		double domainMin = -1*Double.MAX_VALUE;
 		double domainMax = Double.MAX_VALUE;
-		double xStart = -2.0d;
-		
-				
+		double xStart = -100d;
 		
 		GD.setDomainMin(domainMin);
 		GD.setDomainMax(domainMax);
@@ -32,13 +27,5 @@ public class Question1Main {
 		double result = GD.start();
 		System.out.println(result);
 		
-		
-		
-		
-		
-		
-		
 	}
-	
-	
 }

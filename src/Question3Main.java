@@ -23,7 +23,11 @@ public class Question3Main
   {
     Thread[] threads = new Thread[Config.NUM_WORKERS];
     GradientDescentWorker[] workers = new GradientDescentWorker[Config.NUM_WORKERS];
-
+    double domainMin = -20d;
+    double domainMax = 20d;
+    double increment = (domainMax - domainMin) / Config.NUM_WORKERS;
+    double subDomainMin = domainMin;
+    
     for (int i = 0; i < Config.NUM_WORKERS; i++)
     {
       GradientDescent GD = new GradientDescent(
@@ -32,10 +36,9 @@ public class Question3Main
               Config.MAX_STEPS,
               Config.PRECISION);
 
-      double domainMin = -20d;
-      double domainMax = 20d;
-      GD.setDomainMin(domainMin);
-      GD.setDomainMax(domainMax);
+      GD.setDomainMin(subDomainMin);
+      subDomainMin += increment;
+      GD.setDomainMax(subDomainMin);      
 
       GradientDescentWorker worker = new GradientDescentWorker(GD, 
               Config.FUNCTION, Config.NUM_WORKER_ITERATIONS);
